@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>大数据</title>
+</head>
+
+<body>
+    <div class="cntent">
+        <form action="http://127.0.0.1:3006/api/login" method="POST" name="reguser" target="myframe">
+            <label for="username">用户名：</label><input type="text" id="username" name="username" value=""
+                autocomplete="off">
+            <br />
+            <label for="password">密码:</label><input type="text" id="password" name="password" value=""
+                autocomplete="off">
+            <br>
+            <input type="submit" id="submit">
+        </form>
+        <iframe src="" width="200" height="200" frameborder="0" name="myframe" style="display:NONE"></iframe>
+    </div>
+</body>
+<script>
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', 'http://127.0.0.1:3006/api/login');
+    xhr.send();
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200)
+                console.log(xhr.response);
+        }
+    }
+</script>
+
+</html>

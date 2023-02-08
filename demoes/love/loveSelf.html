@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>love</title>
+    <style>
+        body {
+            background-color: black;
+        }
+
+        #contain {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="contain" width="800px" height="800px"></canvas>
+</body>
+<script>
+    window.requestAnimFrame = (function () {
+        return window.requestAnimationFrame ||
+            window.webkitRequestAnimationFrame ||
+            window.mozRequestAnimationFrame ||
+            window.oRequestAnimationFrame ||
+            window.msRequestAnimationFrame ||
+            function (callback) {
+                window.setTimeout(callback, 1000 / 60);
+            };
+    })();
+    var contain = document.getElementById('contain');
+    var ctx = contain.getContext('2d');
+    function point(size) {
+        var pointArr = [];
+        let t = 0;
+        // 每次增长多少弧度
+        let vt = 0.01;
+        // 最大弧度
+        let maxt = 2 * Math.PI;
+        // 根据增长弧度得循环次数
+        let maxi = Math.ceil(maxt / vt);
+        // 步长越大，画的形状越大size
+        let x = 0;
+        let y = 0;
+        for (let i = 0; i <= maxi; i++) {
+            // x=16 * (sin(t)) ^ 3;
+            let x = 16 * Math.pow(Math.sin(t), 3);
+            // y=13 * cos(t) - 5 * cos(2 * t) - 2 * cos(3 * t) - cos(4 * t)
+            let y = 13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t);
+            t += vt;
+            pointArr.push([x * size, -y * size]);
+        }
+        return pointArr;
+    }
+    //将小爱心变成图片
+    function drawMini() {
+        var canvas = document.createElement('canvas');
+        canvas.width = 35;
+        canvas.height = 30;
+        var img = canvas.getContext('2d');
+        img.translate(35 / 2, 15);
+        img.fillStyle = '#ea80b0';
+        img.strokeStyle = '#ea80b0';
+        let pointArrMini = point(1);
+        img.moveTo(pointArrMini[0][0], pointArrMini[0][1]);
+        for (j = 1; j < pointArrMini.length; j++) {
+            img.lineTo(pointArrMini[j][0], pointArrMini[j][1]);
+        }
+        img.stroke();
+        img.fill();
+        return canvas;
+    }
+    //爱心动画
+    ctx.translate(400, 400);
+    var canvas = drawMini();
+    var image = new Image();
+    image.src = canvas.toDataURL();
+    // let amount = 0;
+    let baseSize = 13;
+    let baseW = 0;
+    let baseH = 0;
+    var tag = false;
+    function draw() {
+        for (let i = 0; i < point(baseSize).length && baseSize < 18; i += amount) {
+            ctx.drawImage(image, point(baseSize)[i][0], point(baseSize)[i][1], baseW, baseH);
+        }
+        if (baseSize > 18) {
+            tag = true;
+        }
+        if (tag == true) {
+            baseSize -= 0.1;
+            baseW -= 1;
+            baseH -= 1;
+            ctx.globalAlpha -= 0.05;
+            if(ctx.globalAlpha <= 0 ){
+                return;
+            }
+        } else {
+            ctx.globalAlpha = 1;
+            baseSize += 0.1;
+            baseW += 1;
+            baseH += 1;
+        }
+        if (baseSize <= 13) {
+            tag = false;
+        }
+    }
+    (function render() {
+        requestAnimationFrame(render);
+        ctx.clearRect(-400, -400, 800, 800);
+        for (let i = 0; i < 10; i+=1) {
+            console.log(1)
+            // amount=Math.ceil(Math.random()*10+20);
+            amount=20;
+            draw();
+        }
+    })()
+</script>
+
+</html>

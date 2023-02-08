@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            position: relative;
+            perspective: 500px;
+        }
+        .box {
+            position: absolute;
+            left: 50%;
+            /* transform-style: preserve-3d; */
+        }
+
+        .front {
+            position: absolute;
+            z-index: 1;
+            transform: translate(-50%,80%);
+            width: 300px;
+            height: 300px;
+            box-sizing: border-box;
+            text-align: center;
+            padding-top: 130px;
+            background-color: rebeccapurple;
+            border-radius: 50%;
+            animation: rotate 2s linear infinite forwards alternate;
+        }
+        .rear {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            box-sizing: border-box;
+            text-align: center;
+            padding-top: 130px;
+            border-radius: 50%;
+            background-color: pink;
+            transform: translate(-50%,80%) rotateY(-180deg);
+            animation: rear 2s linear infinite forwards alternate;
+        }
+
+        @keyframes rotate {
+            0%{}
+            100% {
+                transform: translate(-50%,80%) rotateY(180deg);
+                z-index: 0;
+            }
+        }
+
+        @keyframes rear {
+            0%{}
+            100% {
+                transform: translate(-50%,80%) rotateY(0deg);
+                z-index: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="front">我是前面</div>
+        <div class="rear">我是背面</div>
+    </div>
+</body>
+</html>

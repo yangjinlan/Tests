@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/1.2.0/axios.js"></script>
+</head>
+<body>
+    <div>
+    </div>
+</body>
+<script type="text/javascript" src="../../jquery/jquery-3.6.0.min.js"></script>
+<script>
+    //模拟jsonp
+    // function handle(data){
+    //     $('div').text(data.name+','+data.age);
+    // }
+    // const script=document.createElement('script');
+    // script.src='http://127.0.0.1:8000/jsonp-demo';
+    // document.body.appendChild(script);
+    
+    //jQuery发送AJAX请求
+    // $.post('http://127.0.0.1:8000/jQuery-server',{username:'yangjinlan'},function (data) {
+    //     console.log(data);
+    //     console.log('成功');
+    // },'text');
+
+    //jQuery通用方式
+    // $.ajax({
+    //     url:'http://127.0.0.1:8000/jQuery-server',
+    //     data: {username:'yangjinlan'},
+    //     type:'GET',
+    //     dataType:'json',
+    //     success:function(data){
+    //         console.log(data);
+    //     }
+    // })
+
+    //jQuery发送jsonp请求
+
+    $.getJSON('http://127.0.0.1:8000/jQuery-jsonp-server?callback=?',function(data){
+        console.log(data.name);
+    })
+
+    //Axios发送AJAX请求
+    // axios.post('http://127.0.0.1:8000/Axios-server', {id:12},{
+    //     params:{
+    //         username:'yangjinlan'
+    // },
+    //     headers:{
+    //         a:100,
+    //         b:200
+    //     }
+    // }).then(value=>{
+    //     console.log(value);
+    // })
+
+//axios通用方式
+// axios({
+//     url:'http://127.0.0.1:8000/Axios-server',
+//     method: 'GET',
+//     params: {
+//         username: 'yangjinlan'
+//     },
+//     headers: {
+//         a: 100,
+//     },
+
+// }).then(value=>{
+//     console.log('YES')
+// })
+
+//fetch方式发送AJAX
+
+// fetch('http://127.0.0.1:8000/fetch-server',{
+//     method:'GET',
+//     params: {
+//         username: 'yangjinlan'
+//     },
+//     headers: {
+//         a: 100,
+//     },
+// }).then(value=>{
+//     console.log('AJAX fetch');
+// })
+</script>
+</html>

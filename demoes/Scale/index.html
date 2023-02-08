@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../../images/logo-mi2.png">
+    <link rel="stylesheet" href="../../font_3286939_65esoim7am/iconfont.css">
+    <title>ScaleDemo</title>
+    <style>
+        ul li {
+            display: inline-block;
+            height: 100px;
+            width: 80px;
+            margin-top: -16px;
+            margin-right: 2px;
+            list-style: none;
+            box-sizing: border-box;
+        }
+
+        ul {
+            position: absolute;
+            left: 0px;
+            width: 700px;
+            margin-left: -39px;
+            -webkit-user-select: none;
+            /*webkit*/
+            user-select: none;
+        }
+
+        ul li:hover {
+            border: 2px solid rgb(242, 56, 56);
+        }
+
+        .contain {
+            margin: auto;
+            margin-top: 100px;
+            width: 500px;
+            height: 600px;
+            border: 1px solid black;
+            cursor: pointer;
+        }
+
+        .mdImg {
+            position: relative;
+            width: 500px;
+            height: 500px;
+            cursor: move;
+            box-sizing: border-box;
+        }
+
+        .selector {
+            position: absolute;
+            z-index: 1;
+            display: none;
+            width: 250px;
+            height: 250px;
+            background-color: rgb(227, 227, 128, 0.4);
+        }
+
+        .maskTop {
+            position: absolute;
+            z-index: 2;
+            width: 100%;
+            height: 100%;
+        }
+
+        .IgImg {
+            position: absolute;
+            display: none;
+            width: 500px;
+            height: 500px;
+            margin-left: 500px;
+            box-sizing: border-box;
+            border: 1px solid blue;
+        }
+
+        .smImg {
+            position: relative;
+            width: 500px;
+            height: 100px;
+            box-sizing: border-box;
+        }
+
+        .smImg>div:first-child,
+        .smImg>div:last-child {
+            position: absolute;
+            width: 30px;
+            height: 100px;
+            text-align: center;
+            font-size: 50px;
+            color: rgb(180, 175, 175);
+            background-color: rgba(129, 126, 126, 0.3);
+        }
+
+        .smImg>div:last-child {
+            right: 0;
+            top: 0;
+        }
+
+        .smImg>div:nth-child(2) {
+            position: absolute;
+            overflow: hidden;
+            width: 440px;
+            height: 100px;
+            margin-left: 30px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="contain">
+        <div class="IgImg">
+        </div>
+        <div class="mdImg">
+            <span class="selector"></span>
+            <span class="maskTop"></span>
+        </div>
+        <div class="smImg">
+            <div>
+                <span class="forward iconfont icon-fangxiang-zuo"></span>
+            </div>
+            <div>
+                <ul>
+                    <li class="" style="background: url(../../images/baby1.jpg); background-size: 80px 100px;"></li>
+                    <li class="" style="background: url(../../images/baby2.jpg); background-size: 80px 100px;"></li>
+                    <li class="center" style="background: url(../../images/baby3.jpg); background-size: 80px 100px;">
+                    </li>
+                    <li class="" style="background: url(../../images/baby4.jpg); background-size: 80px 100px;"></li>
+                    <li class="" style="background: url(../../images/baby5.jpg); background-size: 80px 100px;"></li>
+                    <li class="" style="background: url(../../images/baby6.jpg); background-size: 80px 100px;"></li>
+                    <li class="" style="background: url(../../images/baby3.jpg); background-size: 80px 100px;"></li>
+                    <li class="" style="background: url(../../images/baby4.jpg); background-size: 80px 100px;"></li>
+                </ul>
+            </div>
+            <div>
+                <span class="backward iconfont icon-fangxiang-you"></span>
+            </div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="../../jquery/jquery-3.6.0.min.js"></script>
+<script>
+
+    window.onload = function () {
+        moveMiniImg();
+        displayMdImg();
+        transMdImg();
+        bigImg()
+    }
+
+    //切换小图
+    function moveMiniImg() {
+        var $forward = $('.smImg div:first');
+        var $backward = $('.smImg div:last');
+        var $Ul = $('.smImg div:eq(1) ul');
+        var $lis = $Ul.children('li');
+        var $lic = $lis.filter('[class=center]');
+        //初始化
+        if ($Ul.css('left') == 0 + 'px') {
+            $backward.css('opacity', 0.5);
+        }
+        //点击左
+        $forward.on('click', function () {
+            if (parseInt($Ul.css('left')) > -261) {
+                $backward.css('opacity', 1);
+                $Ul.css({
+                    left: parseInt($Ul.css('left')) - 87,
+                });
+                $lic.next().addClass('center');
+                $lic.removeClass();
+                $lic = $lic.next();
+                displayMdImg();
+
+            }
+            if ($Ul.css('left') == -261 + 'px') {
+                $forward.css('opacity', 0.5);
+            }
+
+        })
+        //点击左
+        $backward.click(function () {
+            if (parseInt($Ul.css('left')) < 0) {
+                $forward.css('opacity', 1);
+                $Ul.css({
+                    left: parseInt($Ul.css('left')) + 87,
+                });
+                $lic.prev().addClass('center');
+                $lic.removeClass();
+                $lic = $lic.prev();
+                displayMdImg();
+
+            }
+            if ($Ul.css('left') == 0 + 'px') {
+                $backward.css('opacity', 0.5);
+            }
+
+        })
+
+    }
+
+    //变换中图
+    function displayMdImg() {
+        var $mdImg = $('.mdImg');
+        var $center = $('.smImg div:eq(1) ul li').filter('[class=center]');
+        $mdImg.css({
+            background: $center.css('background'),
+            backgroundRepeat: 'no-repeat',
+            backgroundSize: '500px 500px',
+        })
+        $('.IgImg').css({
+            background: $center.css('background'),
+            backgroundRepeat: 'no-repeat',
+            backgroundSize: '1000px 1000px',
+        })
+    }
+
+    //当鼠标划过或点击时切换中图
+    function transMdImg() {
+        var $Ul = $('.smImg div:eq(1) ul');
+        var $lis = $Ul.children('li');
+        $lis.on('click mouseenter', function () {
+            $lis.siblings().removeClass();
+            $(this).addClass('center');
+            displayMdImg();
+            $lis.siblings().removeClass();
+        })
+    }
+
+    //放大镜效果
+    function bigImg() {
+        var $mdImg = $('.mdImg');
+        var $selector = $('.selector');
+        var $IgImg = $('.IgImg');
+        var left = 0;
+        var top = 0;
+        var $selhalfW = parseInt($selector.css('width')) / 2;
+        var $selhalfH = parseInt($selector.css('height')) / 2;
+        var $center = $('.smImg div:eq(1) ul li').filter('[class=center]');
+        //鼠标移入
+        $mdImg.hover(function () {
+            //鼠标移动
+            $mdImg.mousemove(function (event) {
+                $IgImg.show();
+                $selector.show();
+                left = event.offsetX - $selhalfW;
+                top = event.offsetY - $selhalfH;
+                if (left < 0) {
+                    left = 0;
+                } else if (left > parseInt($mdImg.css('width')) - $selhalfW * 2) {
+                    left = parseInt($mdImg.css('width')) - $selhalfW * 2;
+                }
+                if (top < 0) {
+                    top = 0;
+                } else if (top > parseInt($mdImg.css('height')) - $selhalfH * 2) {
+                    top = parseInt($mdImg.css('height')) - $selhalfH * 2;
+                }
+                //黄块位置变化
+                $selector.css({
+                    left: left,
+                    top: top
+                })
+                //大图位置变化
+                $('.IgImg').css({
+                    backgroundPositionX:-left*2,
+                    backgroundPositionY: -top*2,
+
+                })
+
+            })
+        }, function () {
+            //鼠标移出黄块消失
+            $IgImg.hide();
+            $selector.hide();
+        })
+    }
+
+</script>
+
+</html>

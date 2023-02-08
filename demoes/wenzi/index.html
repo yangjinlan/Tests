@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            width: 100%;
+            color: white;
+            background-color: rgb(3, 112, 3);
+        }
+
+        .all {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            text-transform: uppercase;
+            text-align: center;
+            border-radius: 50%;
+            animation: rotate 10s linear infinite alternate;
+        }
+
+        @keyframes rotate {
+            0% {
+                width: 50vh;
+                height: 50vh;
+                font-size: 7vh;
+                transform: translate(-50%, -50%) rotate(360deg);
+            }
+
+            100% {
+                width: 5vh;
+                height: 5vh;
+                font-size: 1vh;
+                opacity: 0;
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+        }
+
+        .all span {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="all">
+        helloworldhelloworld
+    </div>
+</body>
+<script>
+    const circle = document.querySelector('.all');
+    const text = circle.innerText;
+    console.log(text)
+    circle.innerText = '';
+    for (let i = 0; i < text.length; i++) {
+        let letter = text[i];
+        let span = document.createElement('span');
+        span.innerText = letter;
+        let r = (360 / text.length) * i;
+        span.style.transform = 'rotate(' + r + 'deg)';
+        circle.appendChild(span);
+
+    }
+</script>
+
+</html>

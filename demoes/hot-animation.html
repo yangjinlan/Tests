@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            position: relative;
+            width: 1120px;
+            height: 525px;
+            background-image: url(../images/1120.jpg);
+            margin: auto;
+
+        }
+        
+        .city {
+            position: absolute;
+        }
+
+        .city .dot {
+            width: 10px;
+            height: 10px;
+            background-color: rgb(255, 0, 0, 0.6);
+            border-radius: 50%;
+        }
+
+        div[class^=point] {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            width: 9px;
+            height: 9px;
+            box-shadow: 0 0 12px red;
+            border-radius: 50%;
+        }
+
+        .point1 {
+            animation: move 1s linear infinite;
+        }
+
+        .point2 {
+            animation: move 1s 0.3s linear infinite;
+        }
+
+        .point3 {
+            animation: move 1s 0.6s linear infinite;
+        }
+        @keyframes move {
+            0% {}
+            50% {
+                width: 50px;
+                height: 50px;
+                opacity: 1;
+            }
+            100% {
+                width: 70px;
+                height: 70px;
+                opacity: 0;
+            }
+        }
+        .city1 {
+            left: 717px;
+            top: 205px;
+        }
+
+        .city2 {
+            left: 810px;
+            top: 405px;
+        }
+
+        .city3 {
+            top: 435px;
+            left: 700px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div class="son"></div>
+        <div class="city city1">
+            <div class="dot"></div>
+            <div class="point1"></div>
+            <div class="point2"></div>
+            <div class="point3"></div>
+        </div>
+        <div class="city city2">
+            <div class="dot"></div>
+            <div class="point1"></div>
+            <div class="point2"></div>
+            <div class="point3"></div>
+        </div>
+        <div class="city city3">
+            <div class="dot"></div>
+            <div class="point1"></div>
+            <div class="point2"></div>
+            <div class="point3"></div>
+        </div>
+
+    </div>
+</body>
+
+</html>

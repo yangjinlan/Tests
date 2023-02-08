@@ -1,0 +1,72 @@
+{
+  "id": "3286939",
+  "name": "new",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "31392109",
+      "name": "方向-右",
+      "font_class": "fangxiang-you",
+      "unicode": "e6cd",
+      "unicode_decimal": 59085
+    },
+    {
+      "icon_id": "31392111",
+      "name": "方向-左",
+      "font_class": "fangxiang-zuo",
+      "unicode": "e6ce",
+      "unicode_decimal": 59086
+    },
+    {
+      "icon_id": "29959508",
+      "name": "下载",
+      "font_class": "xiazai",
+      "unicode": "100d9",
+      "unicode_decimal": 65753
+    },
+    {
+      "icon_id": "29959509",
+      "name": "编写",
+      "font_class": "bianxie",
+      "unicode": "100da",
+      "unicode_decimal": 65754
+    },
+    {
+      "icon_id": "27804868",
+      "name": "打卡",
+      "font_class": "daka",
+      "unicode": "100ac",
+      "unicode_decimal": 65708
+    },
+    {
+      "icon_id": "27804869",
+      "name": "我的",
+      "font_class": "wode",
+      "unicode": "100ad",
+      "unicode_decimal": 65709
+    },
+    {
+      "icon_id": "27804870",
+      "name": "会员",
+      "font_class": "huiyuan",
+      "unicode": "100ae",
+      "unicode_decimal": 65710
+    },
+    {
+      "icon_id": "27804871",
+      "name": "定位",
+      "font_class": "dingwei",
+      "unicode": "100af",
+      "unicode_decimal": 65711
+    },
+    {
+      "icon_id": "27804873",
+      "name": "拍照",
+      "font_class": "paizhao",
+      "unicode": "100b0",
+      "unicode_decimal": 65712
+    }
+  ]
+}

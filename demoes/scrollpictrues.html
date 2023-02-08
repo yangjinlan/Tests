@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet icon" href="../images/1120.jpg">
+    <link rel="stylesheet" href="../font_3286939_65esoim7am/iconfont.css">
+    <title>轮播图</title>
+    <style>
+        .all {
+            margin: auto;
+            width: 500px;
+            height: 500px;
+            border: 1px solid black;
+            overflow: hidden;
+        }
+
+        .picture {
+            position: relative;
+            width: 2500px;
+            height: 500px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .picture img {
+            display: block;
+            float: left;
+            width: 500px;
+            border: 0;
+        }
+
+        .btn {
+            position: absolute;
+            top: 480px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            box-sizing: border-box;
+            width: 500px;
+            height: 15px;
+        }
+
+        .btn div {
+            width: 40px;
+            height: 2px;
+            border: 1px solid rgb(208, 200, 200);
+            margin-left: 7px;
+            cursor: pointer;
+            border-radius: 25%;
+        }
+
+        .bgc {
+            background-color: rgb(208, 200, 200);
+        }
+
+        .iconfont {
+            font-size: 60px;
+            color: #beb9b9;
+            opacity: 0.5;
+        }
+
+        .go {
+            position: absolute;
+            display: flex;
+            justify-content: space-between;
+            width: 500px;
+            top: 250px;
+        }
+
+        .left,
+        .right {
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="all">
+        <div class="picture">
+            <img src="../images/baby1.jpg" alt="">
+            <img src="../images/baby2.jpg" alt="">
+            <img src="../images/baby3.jpg" alt="">
+            <img src="../images/baby4.jpg" alt="">
+            <img src="../images/baby5.jpg" alt="">
+        </div>
+        <div class="btn">
+            <div class="btn1 bgc"></div>
+            <div class="btn2"></div>
+            <div class="btn3"></div>
+            <div class="btn4"></div>
+            <div class="btn5"></div>
+        </div>
+        <div class="go">
+            <div class="left iconfont">&#xe6ce;</div>
+            <div class="right iconfont">&#xe6cd;</div>
+        </div>
+
+    </div>
+</body>
+<script>
+    window.onload = function () {
+        var picture = document.getElementsByClassName("picture");
+        var left = document.getElementsByClassName("left");
+        var right = document.getElementsByClassName("right");
+        var go = document.getElementsByClassName("go");
+        var btn = document.getElementsByClassName("btn");
+        var reg = /\bbgc\b/g;
+        picture[0].style.left = 0;
+        function timerFun() {
+            if (reg.test(btn[0].children[-parseInt(picture[0].style.left) / 500].className)) {
+                btn[0].children[-parseInt(picture[0].style.left) / 500].className = btn[0].children[-parseInt(picture[0].style.left) / 500].className.replace(reg, "");
+            }
+            if (parseInt(picture[0].style.left) == -2000) {
+                picture[0].style.left = 500 + 'px';
+            }
+            picture[0].style.left = parseInt(picture[0].style.left) - 500 + "px";
+            btn[0].children[-parseInt(picture[0].style.left) / 500].className += " " + "bgc";
+        }
+        var timer = setInterval(timerFun, 1000);
+        picture[0].onmouseover = function () {
+            clearInterval(timer);
+        }
+        picture[0].onmouseleave = function () {
+            timer = setInterval(timerFun, 1000);
+        }
+        left[0].onclick = function () {
+            clearInterval(timer);
+            if (reg.test(btn[0].children[-parseInt(picture[0].style.left) / 500].className)) {
+                btn[0].children[-parseInt(picture[0].style.left) / 500].className = btn[0].children[-parseInt(picture[0].style.left) / 500].className.replace(reg, "");
+            }
+            if (parseInt(picture[0].style.left) == 0) {
+                picture[0].style.left = -2500 + 'px';
+            }
+            picture[0].style.left = parseInt(picture[0].style.left) + 500 + 'px';
+            btn[0].children[-parseInt(picture[0].style.left) / 500].className += " " + "bgc";
+        }
+        right[0].onclick = function () {
+            clearInterval(timer);
+            timerFun();
+        }
+        //点击下方按钮
+        for (var i = 0; i < btn[0].children.length; i++) {
+            btn[0].children[i].num=i;
+            btn[0].children[i].onclick = function () {
+                clearInterval(timer);
+                if (reg.test(btn[0].children[-parseInt(picture[0].style.left) / 500].className)) {
+                    btn[0].children[-parseInt(picture[0].style.left) / 500].className = btn[0].children[-parseInt(picture[0].style.left) / 500].className.replace(reg, "");
+                }
+                console.log(this.num);
+                picture[0].style.left = -(this.num*500) + 'px';
+                btn[0].children[-parseInt(picture[0].style.left) / 500].className += " " + "bgc";
+            }
+        }
+    }
+</script>
+
+</html>
