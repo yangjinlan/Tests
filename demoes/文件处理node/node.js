@@ -23,7 +23,7 @@ app.listen(8080);
 app.on('request', (req, res) => {
         if (req.url === '/index.html' || req.url === '/'){
             res.writeHead(302, {
-                Location: 'https://sso.huohua.cn/authentication/require'
+                Location: 'https://www.baidu.com/'
             });
             console.log(req.url);
         }
